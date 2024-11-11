@@ -1,0 +1,125 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin: 20px 0;
+}
+
+.menu {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.dish {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 300px;
+}
+
+.dish:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dish img {
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px 0 0 15px;
+    transition: transform 0.3s ease;
+}
+
+.dish:hover img {
+    transform: scale(1.05);
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.description h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.description p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.edit-btn, .order-btn {
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.order-btn {
+    background-color: #dd3030;
+}
+
+.edit-btn:hover {
+    background-color: #005bb5;
+}
+
+.order-btn:hover {
+    background-color: #a02525;
+}
+
+/* Botón para agregar nuevo plato */
+.add-dish-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-dish-btn:hover {
+    background-color: #005bb5;
+}
