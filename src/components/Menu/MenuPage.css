@@ -1,0 +1,332 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('src/images/forest-3369950_1920.jpg') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    margin: 0; /* Elimina márgenes no deseados */
+    position: relative;
+    overflow: hidden; /* Para evitar desplazamiento no deseado */
+    padding-top: 100px; /* Añadido para evitar que el header tape el contenido */
+}
+
+/* Fondo oscuro */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad aquí */
+    z-index: -1;
+}
+
+header {
+    width: 100%;
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 .4rem .8rem #0005;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    left: 0;
+}
+
+main {
+    margin-top: 120px; /* Ajusta el espacio después del header */
+    width: 100%; /* Asegura que el contenido principal se expanda */
+}
+
+/* Otros estilos del header y menú */
+
+/* Contenedor y botones en el header */
+.header-container {
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    flex-grow: 1;
+}
+
+header .username {
+    font-size: 18px;
+    color: #f6fbff;
+}
+
+header .logout-btn {
+    width: auto;
+    background-color: white;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+h1{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header .logout-btn:hover {
+    background-color: #333;
+    color: white;
+}
+
+header .logout-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #ebe4e4;
+    margin: 20px 0;
+}
+
+.menu {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas si es necesario */
+    gap: 40px;
+    justify-content: center; /* Centra las tarjetas */
+    width: 100%;
+}
+
+.dish {
+    display: flex;
+    background-color: rgba(132, 59, 28, 0.8); /* Color con 80% de opacidad */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 250px; /* Tamaño fijo para las tarjetas */
+    height: 350px; /* Altura más consistente */
+    flex-direction: column;
+}
+
+
+.dish:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dish img {
+    width: 100%;
+    height: 60%; /* Ajuste de la altura de la imagen */
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.3s ease;
+}
+
+.dish:hover img {
+    transform: scale(1.05);
+}
+
+.content {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.description h3 {
+    font-size: 1.4rem;
+    color: #e7e1e1;
+    margin-bottom: 10px;
+}
+
+.description p {
+    font-size: 1.1rem;
+    color: #ebe4e4;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.edit-btn, .order-btn {
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.order-btn {
+    background-color: #34c759;
+}
+
+.edit-btn:hover {
+    background-color: #005bb5;
+}
+
+.order-btn:hover {
+    background-color: #28a745;
+}
+
+/* Botón para agregar nuevo plato */
+.add-dish-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-dish-btn:hover {
+    background-color: #005bb5;
+}
+
+/* Pop-up oculto por defecto */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Ocultamos el pop-up inicialmente */
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Estilo del contenido del pop-up */
+.popup-content {
+    background-color: rgba(132, 59, 28, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 10px 20px rgba(132, 59, 28, 0.8);
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Estilo de los botones dentro del pop-up */
+
+
+/* Estilo general del popup */
+.popup {
+    display: none; /* Inicia oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que el popup esté por encima de otros elementos */
+}
+
+/* Contenido del popup */
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+/* Título del popup */
+.popup h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo de la lista de botones */
+.sede-list {
+    display: flex;
+    flex-direction: column; /* Los botones estarán apilados verticalmente */
+    gap: 15px; /* Distancia entre los botones */
+    margin-bottom: 20px; /* Espacio entre los botones y los botones de acción */
+}
+
+/* Estilo de los botones */
+.sede-list button, .popup-actions button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sede-list button:hover, .popup-actions button:hover {
+    background-color: #2980b9;
+}
+
+/* Estilo para los botones de acción (confirmar/cancelar) */
+.popup-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm-btn {
+    background-color: #2ecc71;
+}
+
+.confirm-btn:hover {
+    background-color: #27ae60;
+}
+
+.close-btn {
+    background-color: #e74c3c;
+}
+
+.close-btn:hover {
+    background-color: #c0392b;
+}
