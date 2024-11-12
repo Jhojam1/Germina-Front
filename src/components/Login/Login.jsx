@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Login.css';  // Asegúrate de que tus estilos están aquí
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 import SignUpForm from "./SignUpForm.jsx";
 import SignInForm from "./SignInForm.jsx";
@@ -9,6 +10,7 @@ import AnimatedDots from "./AnimatedDots.jsx";
 
 const Login = () => {
     const [isRightPanelActive, setIsRightPanelActive] = useState(false);
+    const navigate = useNavigate();
 
     const handleSignUpClick = () => {
         setIsRightPanelActive(true);
@@ -19,25 +21,23 @@ const Login = () => {
     };
 
     return (
-        <div className={`container ${isRightPanelActive ? 'right-panel-active' : ''}`}>
-            {/* Formulario de registro */}
-            <div className="form-container sign-up-container">
-                <SignUpForm />
-            </div>
+        <div className="Login-Page">
+            <div className={`container ${isRightPanelActive ? 'right-panel-active' : ''}`}>
+                <div className="form-container sign-up-container">
+                    <SignUpForm />
+                </div>
 
-            {/* Formulario de inicio de sesión */}
-            <div className="form-container sign-in-container">
-                <SignInForm />
-            </div>
+                <div className="form-container sign-in-container">
+                    <SignInForm navigate={navigate} />
+                </div>
 
-            {/* Contenedor de overlay con los botones */}
-            <div className="overlay-container">
-                <OverlayPanel onSignInClick={handleSignInClick} onSignUpClick={handleSignUpClick} />
-            </div>
+                <div className="overlay-container">
+                    <OverlayPanel onSignInClick={handleSignInClick} onSignUpClick={handleSignUpClick} />
+                </div>
 
-            {/* Footer y animación de puntos */}
-            <Footer />
-            <AnimatedDots />
+                <Footer />
+                <AnimatedDots />
+            </div>
         </div>
     );
 };

@@ -81,10 +81,7 @@ header .logout-btn {
     transition: background-color 0.3s, color 0.3s;
 }
 
-h1{
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-}
+
 
 header .logout-btn:hover {
     background-color: #333;
