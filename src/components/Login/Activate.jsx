@@ -7,50 +7,98 @@ export const ActivatePage = () => {
     const { token } = useParams();
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const verifyEmail = async () => {
-            setLoading(true);
             try {
-                // Realizamos la solicitud para activar la cuenta usando el token
-                const response = await axios.put(`https://proyecto-germina-production.up.railway.app/api/auth/activate-email?token=${token}`);
-
+                const response = await axios.get('https://proyecto-germina-production.up.railway.app/api/auth/verify-email', {
+                    params: { token }
+                });
                 if (response.status === 200) {
                     setError('Correo electrónico verificado correctamente.');
+                    setShowPopup(true); // Mostrar popup
                 } else {
-                    setError(`Error al verificar correo electrónico: ${response.data}`);
+                    setError(`Error al verificar correo electrónico: ${response.data} .`);
+                    setShowPopup(true); // Mostrar popup
+                    return;
                 }
-                setShowPopup(true);
-            } catch (error) {
-                // Manejamos el error, mostrando el mensaje específico si está disponible
-                console.error('Error al verificar correo electrónico:', error);
-                setError(error.response?.data?.message || 'Error al verificar correo electrónico');
-                setShowPopup(true);
-            } finally {
-                setLoading(false);
-                // Redirigimos al usuario a la página principal después de 5 segundos
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/')
                 }, 5000);
+
+                return;
+
+            } catch (error) {
+                console.error('Error verifying email:', error);
+                setError('Error al verificar correo electrónico');
+                setShowPopup(true); // Mostrar popup
+                return;
             }
         };
 
-        // Llamamos a la función de verificación del correo
         verifyEmail();
-    }, [token, navigate]);
+    }, [token]);
 
     const closePopup = () => {
-        setShowPopup(false);  // Cierra el popup cuando el usuario lo desee
+        setShowPopup(false);
     };
 
     return (
         <div>
             <div className="activate">
-                <p style={{ color: 'white' }}>
-                    {loading ? 'Verificando correo electrónico...' : 'Resultado de la verificación'}
-                </p>
+                <p style={{ color: 'white' }}>Verificando correo electrónico...</p>
+            </div>
+            {showPopup && <Popup message={error} onClose={closePopup} />}
+        </div>
+    );
+};
+
+export const Activate = () => {
+    const { token } = useParams();
+    const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const verifyEmail = async () => {
+            console.log(token);
+            try {
+                const response = await axios.put(`https://proyecto-germina-production.up.railway.app/api/auth/activate-email?token=${token}`);
+
+                if (response.status === 200) {
+                    setError('Correo electrónico verificado correctamente.');
+                    setShowPopup(true); // Mostrar popup
+                } else {
+                    setError(`Error al verificar correo electrónico: ${response.data} .`);
+                    setShowPopup(true); // Mostrar popup
+                    return;
+                }
+                setTimeout(() => {
+                    navigate('/')
+                }, 5000);
+
+                return;
+
+            } catch (error) {
+                console.error('Error verifying email:', error);
+                setError('Error al verificar correo electrónico');
+                setShowPopup(true); // Mostrar popup
+                return;
+            }
+        };
+
+        verifyEmail();
+    }, [token]);
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
+    return (
+        <div>
+            <div className="activate">
+                <p style={{ color: 'white' }}>Verificando correo electrónico...</p>
             </div>
             {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
