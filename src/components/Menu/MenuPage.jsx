@@ -19,7 +19,7 @@ const MenuPage = () => {
                 <div className="username">Andres Lozano</div>
                 <div className="header-container">
                     <button className="logout-btn">
-                        <img src="src/images/salida.svg" alt="Icono de salir" /> Salir
+                        <img src="../../../public/images/salida.svg" alt="Icono de salir" /> Salir
                     </button>
                 </div>
             </header>
@@ -28,7 +28,7 @@ const MenuPage = () => {
 
             <div className="menu">
                 <div className="dish" id="dish1">
-                    <img src="src/images/arroz.jpg" alt="Plato 1" />
+                    <img src="../../../public/images/arroz.jpg" alt="Plato 1" />
                     <div className="content">
                         <div className="description">
                             <h3>Plato 1</h3>
@@ -42,7 +42,7 @@ const MenuPage = () => {
                 </div>
 
                 <div className="dish" id="dish2">
-                    <img src="src/images/arroz_chicharron.jpg" alt="Plato 2" />
+                    <img src="../../../public/images/arroz_chicharron.jpg" alt="Plato 2" />
                     <div className="content">
                         <div className="description">
                             <h3>Plato 2</h3>
@@ -56,7 +56,7 @@ const MenuPage = () => {
                 </div>
 
                 <div className="dish" id="dish3">
-                    <img src="src/images/Mote.jpg" alt="Plato 3" />
+                    <img src="../../../public/images/Mote.jpg" alt="Plato 3" />
                     <div className="content">
                         <div className="description">
                             <h3>Plato 3</h3>

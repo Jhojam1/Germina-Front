@@ -6,7 +6,7 @@
 }
 
 body {
-    background: url('src/images/forest-3369950_1920.jpg') no-repeat center center/cover;
+    background: url('../../../public/images/forest-3369950_1920.jpg') no-repeat center center/cover;
     display: flex;
     flex-direction: column;
     align-items: center;
