@@ -1,46 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import Popup from './Popup';  // Asegúrate de tener un componente Popup funcional
+import Popup from './Popup';
 
 export const ActivatePage = () => {
-    const { token } = useParams();  // Recuperamos el token de los parámetros de la URL
+    const { token } = useParams();
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Función para verificar la activación del correo
         const verifyEmail = async () => {
+            setLoading(true);
             try {
-                // Hacemos la petición para activar la cuenta usando el token
+                // Realizamos la solicitud para activar la cuenta usando el token
                 const response = await axios.put(`https://proyecto-germina-production.up.railway.app/api/auth/activate-email?token=${token}`);
 
                 if (response.status === 200) {
-                    // Si la respuesta es correcta, mostramos el mensaje de éxito
                     setError('Correo electrónico verificado correctamente.');
-                    setShowPopup(true);  // Mostrar popup de éxito
                 } else {
-                    // Si la respuesta no es la esperada, mostramos un mensaje de error
                     setError(`Error al verificar correo electrónico: ${response.data}`);
-                    setShowPopup(true);  // Mostrar popup de error
                 }
-
-                // Redirigimos al usuario a la página principal después de unos segundos
-                setTimeout(() => {
-                    navigate('/');  // Redirigir al inicio
-                }, 5000);
-
+                setShowPopup(true);
             } catch (error) {
+                // Manejamos el error, mostrando el mensaje específico si está disponible
                 console.error('Error al verificar correo electrónico:', error);
-                setError('Error al verificar correo electrónico');
-                setShowPopup(true);  // Mostrar popup de error
+                setError(error.response?.data?.message || 'Error al verificar correo electrónico');
+                setShowPopup(true);
+            } finally {
+                setLoading(false);
+                // Redirigimos al usuario a la página principal después de 5 segundos
+                setTimeout(() => {
+                    navigate('/');
+                }, 5000);
             }
         };
 
         // Llamamos a la función de verificación del correo
         verifyEmail();
-    }, [token, navigate]);  // Solo vuelve a ejecutarse si el token cambia
+    }, [token, navigate]);
 
     const closePopup = () => {
         setShowPopup(false);  // Cierra el popup cuando el usuario lo desee
@@ -49,9 +48,11 @@ export const ActivatePage = () => {
     return (
         <div>
             <div className="activate">
-                <p style={{ color: 'white' }}>Verificando correo electrónico...</p>
+                <p style={{ color: 'white' }}>
+                    {loading ? 'Verificando correo electrónico...' : 'Resultado de la verificación'}
+                </p>
             </div>
-            {showPopup && <Popup message={error} onClose={closePopup} />} {/* Mostramos el popup con el mensaje correspondiente */}
+            {showPopup && <Popup message={error} onClose={closePopup} />}
         </div>
     );
 };
