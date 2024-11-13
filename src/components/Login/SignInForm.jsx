@@ -26,9 +26,9 @@ const SignInForm = ({ navigate }) => {
                 localStorage.setItem('user', JSON.stringify({ user, role: authorities[0] }));
 
                 // Redirigir según el rol
-                if (authorities.includes('ADMIN')) {
+                if (authorities.includes('Administrador')) {
                     navigate('/admin');  // Redirigir a la página de administrador
-                } else if (authorities.includes('USER')) {
+                } else if (authorities.includes('Usuario')) {
                     navigate('/menu');  // Redirigir a la página de usuario
                 } else {
                     navigate('/');  // Página predeterminada si el rol no es reconocido
