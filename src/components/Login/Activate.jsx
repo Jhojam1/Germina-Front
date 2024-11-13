@@ -12,7 +12,7 @@ export const ActivatePage = () => {
     useEffect(() => {
         const verifyEmail = async () => {
             try {
-                const response = await axios.get('https://proyecto-germina-production.up.railway.app/api/auth/verify-email', {
+                const response = await axios.get('http://localhost:8080/api/auth/verify-email', {
                     params: { token }
                 });
                 if (response.status === 200) {
@@ -64,7 +64,7 @@ export const Activate = () => {
         const verifyEmail = async () => {
             console.log(token);
             try {
-                const response = await axios.put(`https://proyecto-germina-production.up.railway.app/api/auth/activate-email?token=${token}`);
+                const response = await axios.get(`http://localhost:8080/api/auth/verify-email?token=${token}`);
 
                 if (response.status === 200) {
                     setError('Correo electrónico verificado correctamente.');
